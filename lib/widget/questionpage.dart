@@ -40,9 +40,10 @@ class QuestionPAge extends StatelessWidget {
         backgroundColor: theme.colorScheme.primary,
         floatingActionButton: Visibility(
           visible: index <
-              Provider.of<SummaryProvider>(context, listen: false)
-                  .questionCount!
-                  .toInt(),
+          exercise['count'],
+              // Provider.of<SummaryProvider>(context, listen: false)
+              //     .questionCount!
+              //     .toInt(),
           child: FloatingActionButton(
               backgroundColor: theme.colorScheme.secondary,
               onPressed: () {},
@@ -180,10 +181,10 @@ class QuestionPAge extends StatelessWidget {
                   },
                 ),
                 const SizedBox(height: 20,),
-                index ==
-                        Provider.of<SummaryProvider>(context, listen: false)
-                            .questionCount!
-                            .toInt()
+                index == exercise['count']
+                        // Provider.of<SummaryProvider>(context, listen: false)
+                        //     .questionCount!
+                        //     .toInt()
                     ? ElevatedButton(
                         style: ButtonStyle(
                             backgroundColor: MaterialStateProperty.all<Color>(

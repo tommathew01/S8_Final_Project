@@ -99,7 +99,7 @@ void main() async {
               body: 'Hurry up and Complete todays exercise.',
             ))
           });
-  cron.schedule(Schedule.parse('59 23 * * *'), () async => {await summarize()});
+  cron.schedule(Schedule.parse('12 20 * * *'), () async => {await summarize()});
 
   runApp(const MyApp());
 }

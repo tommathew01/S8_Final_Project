@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:math';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:http/http.dart' as http;
@@ -94,7 +95,7 @@ class SummaryProvider with ChangeNotifier {
     print("testing imp here3");
     print(splited_summary);
     int j = 0;
-    for (int i = 0; i < splited_summary.length - 1; i++) {
+    for (int i = 0; i < min(splited_summary.length - 1,3); i++) {
       String Qoutput = await questionQuery({
         "inputs": splited_summary[i],
       });
@@ -111,7 +112,10 @@ class SummaryProvider with ChangeNotifier {
           .doc('${currentDate}')
           .set({'question${++j}': question, 'answer${j}': answer},
               SetOptions(merge: true));
-
+      FirebaseFirestore.instance
+          .collection(
+              'users/${FirebaseAuth.instance.currentUser!.uid}/exercise')
+          .doc('${currentDate}').update({'count':min(splited_summary.length-1,3)});
       print("question part : " + question);
       print(answer);
     }

@@ -74,7 +74,7 @@ class SummaryPage extends StatelessWidget {
                         .setsearch(true);
                     Provider.of<SearchProvider>(context, listen: false)
                         .setres("");
-                    final currentDate1 = DateTime(2023, 11, 14);
+                    final currentDate1 = DateTime.now();
                     final DateFormat formatter = DateFormat('yyyy-MM-dd');
                     String combinedText = '';
                     for (int i = 0; i < 7; i++) {
@@ -82,15 +82,15 @@ class SummaryPage extends StatelessWidget {
                       String formattedDate = formatter.format(day);
                       final textId = FirebaseFirestore.instance
                           .collection(
-                              'users/${FirebaseAuth.instance.currentUser!.uid}/text')
+                              'users/${FirebaseAuth.instance.currentUser!.uid}/texts')
                           .doc(formattedDate);
-
                       DocumentSnapshot snapshot = await textId.get();
-
                       data = snapshot.data();
                       String? available = data?['content'] as String?;
+                      print("the content is $available");
                       combinedText += available ?? '';
                     }
+                    print("The combined text : $combinedText");
                     showDialog(
                         context: context,
                         builder: (BuildContext context) {

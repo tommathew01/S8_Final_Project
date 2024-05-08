@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -120,10 +121,16 @@ class ResultPage extends StatelessWidget {
     var email = '${FirebaseAuth.instance.currentUser!.email}';   
     final smtpServer =
         gmailSaslXoauth2(email, googleAuth.accessToken.toString());
-    
+        final data;
+    final profile_id = FirebaseFirestore.instance
+                .collection(
+                    'users/').doc(FirebaseAuth.instance.currentUser!.uid);
+    DocumentSnapshot snapshot = await profile_id.get();
+    data = snapshot.data();
+            String? mailid = data?['ct_email'] as String?;
     final message = Message()
     ..from = Address(email,'${FirebaseAuth.instance.currentUser!.displayName}')
-      ..recipients = ['tve20cs077@cet.ac.in']
+      ..recipients = [mailid]
       ..subject = 'Alert!!'
       ..text = 'Scored less than 10 in exercise.';
     try

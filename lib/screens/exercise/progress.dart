@@ -35,13 +35,13 @@ class _Progress_PageState extends State<Progress_Page> {
                 child: LineChartWidget(futurePoints: pricePoints),
               ),
               const SizedBox(height: 20,),
-              ElevatedButton(onPressed: (){
-                Navigator.of(context).push(MaterialPageRoute(
-                        builder: (BuildContext context) =>const MProgress_Page()));
-              }, child: Text("Monthly Progress!")),
-              ElevatedButton(onPressed: (){
-                Navigator.of(context).pop();
-              }, child: Text("Go Back!"))
+              // ElevatedButton(onPressed: (){
+              //   Navigator.of(context).push(MaterialPageRoute(
+              //           builder: (BuildContext context) =>const MProgress_Page()));
+              // }, child: Text("Monthly Progress!")),
+              // ElevatedButton(onPressed: (){
+              //   Navigator.of(context).pop();
+              // }, child: Text("Go Back!"))
             ],
           ),
         ),

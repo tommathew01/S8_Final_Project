@@ -140,10 +140,14 @@ class RecorderService {
   Future<String> query(String filename) async {
     File file = File(filename);
     List<int> data = await file.readAsBytes();
+    Map<String, dynamic> result;
     print('data is $data');
-    var response =
+    do{
+      var response =
         await http.post(Uri.parse(apiUrl), headers: headers, body: data);
-    Map<String, dynamic> result = jsonDecode(response.body);
+    result = jsonDecode(response.body);
+    
+    }while(result==null);
     return result["text"];
   }
 
